@@ -25,19 +25,31 @@ const GET_HOTELS = gql(`
 })
 export class HotelsListComponent implements OnInit {
 
-  hotels: Observable<any>;
+  //hotels: Observable<any>;
+  hotels: any[];
+  loading = true;
+  error: any;
 
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
-    this.hotels = this.apollo
-      .watchQuery({query: GET_HOTELS})
-      .valueChanges.pipe(
-        map((result: any)=>{
-          console.log(result.data.list_hotels)
-          return result.data.list_hotels;
-        })
-      )
+    // this.hotels = this.apollo
+    //   .watchQuery({query: GET_HOTELS})
+    //   .valueChanges.pipe(
+    //     map((result: any)=>{
+    //       console.log(result.data.list_hotels)
+    //       return result.data.list_hotels;
+    //     })
+    //   )
+
+    this.apollo.watchQuery(
+      {query: GET_HOTELS}
+    ).valueChanges.subscribe((result: any)=>{
+      this.hotels = result?.data?.list_hotels;
+      this.loading = result.loading;
+      this.error = result.error;
+    })
+
   }
 
 }

@@ -20,10 +20,12 @@ export class ValidationGuard implements CanActivate {
     let val = localStorage.getItem('isUserLoggedIn');
     if (val != null && val == "true") {
 
+      //we just logged fresh so load dashboard
       if (url == "/login") {
-        return this.router.parseUrl('/home');
+        return this.router.parseUrl('/dashboard');
       }
       else {
+        //some other protected route, just return true
         return true;
       }
 
