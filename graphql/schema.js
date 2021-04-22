@@ -5,11 +5,12 @@ module.exports = buildSchema(`
         list_hotels: [Hotel]
         search_hotel(hotel_name: String, city: String): [Hotel]
         list_bookings: [Booking]
+        list_users: [User]
     },
     type Mutation {
         create_hotel(hotel_id: Int!, hotel_name: String!, street:String, city: String, postal_code: String, price: Float, email: String): Hotel
         create_booking(hotel_id: Int!, user_id: Int!, booking_start: String, booking_end: String): Booking
-        create_profile(user_id: Int!, username: String!, password: String!, email: String!): User
+        create_profile(username: String!, password: String!, email: String!): User
     },
     type Hotel {
         hotel_id: Int
@@ -28,7 +29,6 @@ module.exports = buildSchema(`
         user_id: Int
     },
     type User {
-        user_id: Int!
         username: String!
         password: String!
         email: String!

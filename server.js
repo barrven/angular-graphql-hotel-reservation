@@ -30,7 +30,9 @@ var root = {
     create_booking: gqlResolver.bookHotel, //mutation
     search_hotel: gqlResolver.searchHotel, //query
     list_bookings: gqlResolver.listAllBookings, //query
-    create_profile: gqlResolver.createUserProfile //mutation
+    create_profile: gqlResolver.createUserProfile, //mutation
+    list_users: gqlResolver.listAllUsers
+    //TODO: add method to check username and password
 };
 
 var app = express();

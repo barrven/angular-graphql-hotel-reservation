@@ -9,56 +9,10 @@ function wrapFunction(func, args) {
     })
 }
 
-
-const createHotel = async (args) => {
-    try{
-        const result = await wrapFunction(addHotelToDb, args)
-        return result
-    }
-    catch(err){
-        console.log(err)
-    }
-}
-
 //helper function to be wrapped in wrapFunction
 function addHotelToDb(args, onSuccess, onError){
     const hotel = new Hotel(args)
     hotel.save((err, success) => {
-        if (err){
-            console.log(err)
-            onError(err)
-        }
-        else {
-            console.log(success)
-            onSuccess(success)
-        }
-    })
-}
-
-const listAllHotels = async () => {
-     //lean() causes mongoose to return json instead of instance of query class
-    const hotelList = await Hotel.find({}).lean()
-    return hotelList
-}
-
-
-const bookHotel = async (args) => {
-    try {
-        const result = await wrapFunction(addBookingToDb, args)
-        return result
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
-//helper function to be wrapped in wrapFunction
-function addBookingToDb(args, onSuccess, onError){
-    let d = new Date()
-    args.booking_date = d.getDate() +'-'+ (d.getMonth()+1)+'-'+ d.getFullYear()
-    
-    const booking = new Booking(args)
-    booking.save((err, success) => {
         if (err) {
             console.log(err)
             onError(err)
@@ -69,28 +23,7 @@ function addBookingToDb(args, onSuccess, onError){
         }
     })
 }
-
-
-const searchHotel = async (args) => {
-    const hotelList = await Hotel.find(args).lean()
-    return hotelList
-}
-
-const listAllBookings = async () => {
-    const bookingsList = await Booking.find({}).lean()
-    return bookingsList
-}
-
-const createUserProfile = async (args) => {
-    try {
-        const result = await wrapFunction(addUserToDb, args)
-        return result
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
+//helper function to be wrapped in wrapFunction
 function addUserToDb(args, onSuccess, onError){
     const user = new User(args)
     user.save((err, success) => {
@@ -105,11 +38,78 @@ function addUserToDb(args, onSuccess, onError){
     })
 }
 
+//helper function to be wrapped in wrapFunction
+function addBookingToDb(args, onSuccess, onError){
+    let d = new Date()
+    args.booking_date = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear()
+    const booking = new Booking(args)
+    booking.save((err, success) => {
+        if (err) {
+            console.log(err)
+            onError(err)
+        }
+        else {
+            console.log(success)
+            onSuccess(success)
+        }
+    })
+}
+
 module.exports = {
-    createHotel,
-    listAllHotels,
-    bookHotel,
-    searchHotel,
-    listAllBookings,
-    createUserProfile
+
+     async createHotel(args) {
+        try{
+            const result = await wrapFunction(addHotelToDb, args)
+            return result
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
+
+    async listAllHotels () {
+        //lean() causes mongoose to return json instead of instance of query class
+        console.log('--attempting to get all hotels')
+        const hotelList = await Hotel.find({}).lean()
+        return hotelList
+    },
+
+    async listAllUsers() {
+        //lean() causes mongoose to return json instead of instance of query class
+        const userList = await User.find({}).lean()
+        return userList
+    },
+
+    async bookHotel() {
+        try {
+            const result = await wrapFunction(addBookingToDb, args)
+            return result
+        }
+        catch (err) {
+            console.log(err)
+        }
+    },
+
+    async searchHotel() {
+        const hotelList = await Hotel.find(args).lean()
+        return hotelList
+    },
+
+    async listAllBookings() {
+        const bookingsList = await Booking.find({}).lean()
+        return bookingsList
+    },
+
+    async createUserProfile(args) {
+
+        console.log('attempting to create user')
+        try {
+            const result = await wrapFunction(addUserToDb, args)
+            return result
+        }
+        catch (err) {
+            console.log(err)
+        }
+    },
+
 }
