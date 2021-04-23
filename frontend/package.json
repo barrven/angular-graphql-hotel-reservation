@@ -23,7 +23,9 @@
     "apollo-angular": "^2.4.0",
     "apollo-link-error": "^1.1.13",
     "graphql": "^15.0.0",
+    "graphql-passport": "^0.6.3",
     "rxjs": "~6.6.0",
+    "rxjs-compat": "^6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },

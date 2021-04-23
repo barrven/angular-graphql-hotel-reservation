@@ -16,7 +16,7 @@ const Booking = mongoose.model('Bookings', new mongoose.Schema({
         type: String
     },
     user_id: {
-        type: Number,
+        type: String,
         required: true
     }
 }))

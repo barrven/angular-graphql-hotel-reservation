@@ -57,7 +57,7 @@ function addBookingToDb(args, onSuccess, onError){
 
 module.exports = {
 
-     async createHotel(args) {
+    async createHotel(args) {
         try{
             const result = await wrapFunction(addHotelToDb, args)
             return result
@@ -69,7 +69,6 @@ module.exports = {
 
     async listAllHotels () {
         //lean() causes mongoose to return json instead of instance of query class
-        console.log('--attempting to get all hotels')
         const hotelList = await Hotel.find({}).lean()
         return hotelList
     },
@@ -80,7 +79,7 @@ module.exports = {
         return userList
     },
 
-    async bookHotel() {
+    async bookHotel(args) {
         try {
             const result = await wrapFunction(addBookingToDb, args)
             return result
@@ -90,12 +89,13 @@ module.exports = {
         }
     },
 
-    async searchHotel() {
+    async searchHotel(args) {
         const hotelList = await Hotel.find(args).lean()
         return hotelList
     },
 
     async listAllBookings() {
+        console.log('--listing bookings')
         const bookingsList = await Booking.find({}).lean()
         return bookingsList
     },
@@ -111,5 +111,25 @@ module.exports = {
             console.log(err)
         }
     },
+
+    async getUser(uname){
+        const user = await User.findOne(uname)
+        return user;
+    },
+
+    async checkLogin(credentials){
+
+        const user = await User.findOne({username: credentials.username})
+        console.log('-----check login', user)
+
+        console.log(credentials.password === user.password)
+
+        if(credentials.password === user.password){
+            return user;
+        }
+        else{
+            return null
+        }
+    }
 
 }

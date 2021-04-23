@@ -10,7 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignupComponent } from './signup/signup.component'
+import { SignupComponent } from './signup/signup.component';
+import { MakeBookingComponent } from './make-booking/make-booking.component';
+import { BookingListComponent } from './booking-list/booking-list.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SignupComponent } from './signup/signup.component'
     HotelsListComponent,
     LoginComponent,
     DashboardComponent,
-    SignupComponent
+    SignupComponent,
+    MakeBookingComponent,
+    BookingListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Create Booking</h1>
+    <form class="form" #bookingForm="ngForm" (ngSubmit)="saveBooking(bookingForm)">
+        <p class="form-group">
+            <label for="startDate">Booking start date</label>
+            <input class="form-control" type="date" id="startDate" name="startDate" ngModel>
+        </p>
+    
+        <p>
+            <label for="endDate">Booking End Date</label>
+            <input class="form-control" type="date" id="endDate" name="endDate" ngModel>
+        </p>
+    
+        <div class="nav">
+            <button class="btn btn-primary m-1" type="submit">Submit</button>
+            <a class="btn btn-warning m-1" routerLink="/dashboard">Cancel</a>
+        </div>
+    
+        
+    
+    </form>
+</div>

@@ -1,19 +1,21 @@
-<h1>Login</h1>
-<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-    <p>
-        <label for="username">User Name</label>
-        <input type="text" id="username" name="username" ngModel>
-    </p>
-
-    <p>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" ngModel>
-    </p>
-
-    <p>
-        <button type="submit">Submit</button>
-    </p>
+<div class="container">
+    <h1>Login</h1>
+    <form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <p class="form-group">
+            <label for="username">User Name</label>
+            <input class="form-control" type="text" id="username" name="username" ngModel>
+        </p>
     
-    Don't have an account? <a routerLink="/signup">Signup</a>
+        <p>
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" ngModel>
+        </p>
     
-</form>
+        <p>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </p>
+    
+        Don't have an account? <a routerLink="/signup">Signup</a>
+    
+    </form>
+</div>

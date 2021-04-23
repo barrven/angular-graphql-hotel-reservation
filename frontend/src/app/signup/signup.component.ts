@@ -44,10 +44,14 @@ export class SignupComponent implements OnInit {
           password: this.password,
           email: this.email
         } 
-    }).subscribe((res) =>{
+    }).subscribe((res: any) =>{
 
       //successfully created user
-      console.log('-- got data', res.data)
+      alert('The user was added');
+      localStorage.setItem('isUserLoggedIn', 'true');
+      localStorage.setItem('loggedInUsername', res.data.create_profile.username)
+      localStorage.setItem('loggedInUserEmail', res.data.create_profile.email)
+      this.router.navigate(['/dashboard']);
 
     }, (err) => {
       //could not create user

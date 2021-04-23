@@ -6,6 +6,7 @@ const gqlResolver = require('./graphql/resolver')
 
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const app = express();
 
 const DB_URL = 'mongodb+srv://barri:test@cluster0.rpou1.mongodb.net/Hotel_System?retryWrites=true&w=majority'
 
@@ -31,13 +32,15 @@ var root = {
     search_hotel: gqlResolver.searchHotel, //query
     list_bookings: gqlResolver.listAllBookings, //query
     create_profile: gqlResolver.createUserProfile, //mutation
-    list_users: gqlResolver.listAllUsers
+    list_users: gqlResolver.listAllUsers,
     //TODO: add method to check username and password
+    get_user: gqlResolver.getUser,
+    check_login: gqlResolver.checkLogin
 };
 
-var app = express();
 
-//app.use(bodyParser.json())
+
+app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/graphql', graphqlHTTP({
